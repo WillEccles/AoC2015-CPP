@@ -8,15 +8,20 @@
 #include "Day6.h"
 #include "Day7.h"
 #include "Day8.h"
+#include "Day9.h"
+#include "Day10.h"
+
 
 using namespace std;
 
-#define RUN(day) day.run();
+#define RUN(day) day.run()
 
 Day5 d5;
 Day6 d6;
 Day7 d7;
 Day8 d8;
+Day9 d9;
+Day10 d10;
 
 // here is where I just run each day's class
 int main()
