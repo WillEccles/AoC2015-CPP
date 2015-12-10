@@ -35,23 +35,28 @@ using namespace std;
 string &lines = string("");
 // for counting characters of code that are in memory
 string &memlines = string("");
+string &memlines2 = string("");
 
 // this just makes things easier later on when replacing all the things
 #define REG_REPLACE(str) regex_replace(regex_replace(regex_replace(regex_replace(str, memquotes, ""), doubleslash, "_"), asciihex, "_"), actualquotes, "_")
+// this one is for part 2
+// will have to add 2 to each one to account for the encoded "", hence the +"22" at the end
+#define REG_REPLACE2(str) regex_replace(regex_replace(regex_replace(regex_replace(str, memquotes, "__"), doubleslash, "____"), asciihex, "_____"), actualquotes, "____") + "22"
 
 /* these must be used in this order */
 // since every line is a string made up of a quote on either side, we should remove the " from the beginning and ending of each line
-regex memquotes("^\"|\"$"); // replace with ""
+regex memquotes("^\"|\"$"); // replace with "" (PART 2: "__")
 // get rid of pairs of backslashes, since there will never be just 2 in front of a " or a hex code. there can only be 3 or 1 in front of those.
-regex doubleslash("\\\\\\\\"); // replace with "_"
+regex doubleslash("\\\\\\\\"); // replace with "_" (PART 2: "____")
 // take care of any hex codes in the form of \xab
-regex asciihex("\\\\x[a-zA-Z0-9]{2}"); // replace with "_"
+regex asciihex("\\\\x[a-zA-Z0-9]{2}"); // replace with "_" (PART 2: 
 // now get rid of any instances of \" which leaves just a " in the string
 regex actualquotes("\\\\\""); // replace with "_"
 
 void Day8::run() {
 	lines = "";
 	memlines = "";
+	memlines2 = "";
 
 	cout << "Storing all lines... ";
 
@@ -63,6 +68,7 @@ void Day8::run() {
 	while (getline(file, line)) {
 		lines += REG_REPLACE(line);
 		memlines += line;
+		memlines2 += REG_REPLACE2(line);
 	}
 
 	cout << "DONE" << endl;
@@ -70,6 +76,7 @@ void Day8::run() {
 	cout << "Length in memory: " << memlines.length() << endl;
 	cout << "Actual length: " << lines.length() << endl;
 	cout << "Difference: " << memlines.length() - lines.length() << endl;
+	cout << "Part 2 answer: " << memlines2.length() - memlines.length() << endl;
 
 	cin.get();
 }

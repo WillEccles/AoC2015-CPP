@@ -26,7 +26,7 @@ Day10 d10;
 // here is where I just run each day's class
 int main()
 {
-	RUN(d5);
+	RUN(d8);
     return 0;
 }
 

@@ -32,14 +32,14 @@ After following the instructions, how many lights are lit?
 using namespace std;
 
 // must be static, nobody is really sure why
-static bool lights[1000][1000] = { {0} };
+static int lights[1000][1000] = { {0} };
 
 // these look funny because i have modified my file
 regex on("turnon.*");
 regex off("turnoff.*");
 regex toggle("toggle.*");
 
-int lightson = 0;
+int brightness = 0;
 
 void Day6::run() {
 	cout << "I'm gonna read through the file now and do some math." << endl;
@@ -48,7 +48,8 @@ void Day6::run() {
 
 	readfile();
 
-	cout << "According to my calculations, there are now " << lightson << " lights on." << endl;
+	cout << "According to my calculations, total brightness = " << brightness << "." << endl;
+	cin.get();
 }
 
 void Day6::readfile() {
@@ -60,27 +61,31 @@ void Day6::readfile() {
 	int x1, x2, y1, y2;
 	string instruction, through;
 
+	// IN PART 2: turn on = brightness +1
+	//            turn off = brightness -1
+	//            toggle = brightness +2
+
 	while (infile >> instruction >> x1 >> y1 >> through >> x2 >> y2) {
 		cout << x1 << " " << y1 << " " << x2 << " " << y2 << endl;
 		
 		if (regex_search(instruction, on)) {
 			for (int i = x1; i <= x2; i++) {
 				for (int j = y1; j <= y2; j++) {
-					lights[i][j] = 1;
+					lights[i][j] += 1;
 				}
 			}
 		}
 		else if (regex_search(instruction, off)) {
 			for (int i = x1; i <= x2; i++) {
 				for (int j = y1; j <= y2; j++) {
-					lights[i][j] = 0;
+					if (lights[i][j] > 0) lights[i][j] -= 1;
 				}
 			}
 		}
 		else if (regex_search(instruction, toggle)) {
 			for (int i = x1; i <= x2; i++) {
 				for (int j = y1; j <= y2; j++) {
-					lights[i][j] = !lights[i][j];
+					lights[i][j] += 2;
 				}
 			}
 		}
@@ -90,13 +95,11 @@ void Day6::readfile() {
 
 	cout << ">>>DONE" << endl;
 
-	cout << "Calculating how many lights are on... ";
+	cout << "Calculating brightness... ";
 
 	for (int i = 0; i < 1000; i++) {
 		for (int j = 0; j < 1000; j++) {
-			if (lights[i][j] == 1) {
-				lightson++;
-			}
+			brightness += lights[i][j];
 		}
 	}
 

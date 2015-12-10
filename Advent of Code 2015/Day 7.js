@@ -1,4 +1,6 @@
-b = 14146
+// in part 2 i have to override b to be a's old value, which was 956.
+// b was originally set to 14146
+b = 956
 c = 0
 d = b >> 2
 e = b >> 3

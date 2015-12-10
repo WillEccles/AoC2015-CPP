@@ -34,6 +34,8 @@ using namespace std;
 // just to make things nicer for myself later
 #define MATCH(str, reg) regex_search(str, reg)
 
+//* PART 1 REGEXES *\\
+
 // to match the 3+ vowels rule
 regex vowels("([^aeiou]*[aeiou]+[^aeiou]*){3,}");
 // this matches the pairs of letters
@@ -41,6 +43,10 @@ regex vowels("([^aeiou]*[aeiou]+[^aeiou]*){3,}");
 regex pairs(".*([a-zA-Z])\\1.*");
 // and this MATCHES the strings that are not allowed, so it must be used to see if it DOESNT match -> success
 regex illegals(".*(ab|cd|pq|xy)+.*");
+
+//* PART 2 REGEXES *\\ 
+regex repeatedpair(".*([a-zA-Z]{2}).*\\1.*");
+regex repwithsinglebetween(".*([a-zA-Z])(?:(?!\\1).)\\1.*");
 
 // number of nice strings
 int nice = 0;
@@ -64,7 +70,8 @@ void Day5::readfile() {
 
 	while (getline(infile, line)) {
 		cout << "Testing '" << line << "'... ";
-		if (MATCH(line, vowels) && MATCH(line, pairs) && !MATCH(line, illegals)) {
+		//if (MATCH(line, vowels) && MATCH(line, pairs) && !MATCH(line, illegals)) {
+		if (MATCH(line, repeatedpair) && MATCH(line, repwithsinglebetween)) {
 			nice++;
 			
 			// color [bf] background, foreground -  and colors are green and black
