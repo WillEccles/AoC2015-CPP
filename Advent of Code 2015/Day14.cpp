@@ -29,7 +29,7 @@ void Day14::run() {
 	int speed, tas, tar;
 
 	while (file >> name >> speed >> tas >> tar) {
-		deer[name]["mspeed"] = speed;
+		deer[name]["speed"] = speed;
 		deer[name]["time at speed"] = tas;
 		deer[name]["time at rest"] = tar;
 		deer[name]["current state"] = RUNNING;
@@ -48,14 +48,14 @@ void Day14::run() {
 				}
 				else {
 					deer[n]["time at state"]++;
-					deer[n]["distance"] += speed;
+					deer[n]["distance"] += deer[n]["speed"];
 				}
 			}
 			else {
 				if (deer[n]["time at state"] == deer[n]["time at rest"] + 1) {
 					deer[n]["current state"] = RUNNING;
 					deer[n]["time at state"] = 1;
-					deer[n]["distance"] += speed;
+					deer[n]["distance"] += deer[n]["speed"];
 				}
 				else {
 					deer[n]["time at state"]++;
