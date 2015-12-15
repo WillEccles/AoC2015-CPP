@@ -146,6 +146,8 @@
   <ItemGroup>
     <ClInclude Include="Day10.h" />
     <ClInclude Include="Day11.h" />
+    <ClInclude Include="Day13.h" />
+    <ClInclude Include="Day14.h" />
     <ClInclude Include="Day5.h" />
     <ClInclude Include="Day6.h" />
     <ClInclude Include="Day7.h" />
@@ -158,6 +160,8 @@
     <ClCompile Include="Advent of Code 2015.cpp" />
     <ClCompile Include="Day10.cpp" />
     <ClCompile Include="Day11.cpp" />
+    <ClCompile Include="Day13.cpp" />
+    <ClCompile Include="Day14.cpp" />
     <ClCompile Include="Day5.cpp" />
     <ClCompile Include="Day6.cpp" />
     <ClCompile Include="Day7.cpp" />

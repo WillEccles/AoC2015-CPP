@@ -1,0 +1,10 @@
+Vixen 19 7 124
+Rudolph 3 15 28
+Donner 19 9 164
+Blitzen 19 9 158
+Comet 13 7 82
+Cupid 25 6 145
+Dasher 14 3 38
+Dancer 3 16 37
+Prancer 25 6 143
+[name speed timeatthatspeed resttime] <- this line wont be counted :D
