@@ -42,7 +42,7 @@ void Day14::run() {
 	REPEAT(2503) {
 		for (string n : deernames) {
 			if (deer[n]["current state"] == RUNNING) {
-				if (deer[n]["time at state"] == deer[n]["time at speed"] + 1) {
+				if (deer[n]["time at state"] == deer[n]["time at speed"]) {
 					deer[n]["current state"] = RESTING;
 					deer[n]["time at state"] = 1;
 				}
@@ -52,7 +52,7 @@ void Day14::run() {
 				}
 			}
 			else {
-				if (deer[n]["time at state"] == deer[n]["time at rest"] + 1) {
+				if (deer[n]["time at state"] == deer[n]["time at rest"]) {
 					deer[n]["current state"] = RUNNING;
 					deer[n]["time at state"] = 1;
 					deer[n]["distance"] += deer[n]["speed"];
