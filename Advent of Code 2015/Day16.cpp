@@ -40,14 +40,14 @@ void Day16::run() {
 		// store input
 		for (std::string itemname : items) {
 			// this sets the value to one that will never come up in the input for those inputs that you "can't remember"
-			if (val1 != itemname && val2 != itemname && val3 != itemname) sues[sueid][itemname] = -1;
+			sues[sueid][itemname] = -1;
 		}
 
 		sues[sueid][val1] = num1;
 		sues[sueid][val2] = num2;
 		sues[sueid][val3] = num3;
 
-		std::cout << "Stored Sue #" << sueid << std::endl;
+		//std::cout << "Stored Sue #" << sueid << " " << val1 << " " << num1 << std::endl;
 	}
 
 	file.close();
@@ -57,24 +57,21 @@ void Day16::run() {
 	int suehas = 0;
 
 	// now just loop through and see which of the sues has all of the requirements
-	for (int s = 0; s < sueids.size(); s++) {
+	for (int s = 1; s <= sueids.size(); s++) {
 		for (std::string itemid : items) {
 			if (sues[s][itemid] != -1 && sues[s][itemid] == needs[itemid]) {
 				suehas++;
+				//std::cout << "suehas: " << suehas << " s: " << s << " itemid: " << itemid << " sues[s][itemid]: " << sues[s + 1][itemid] << " needs[itemid]: " << needs[itemid] << std::endl;
 			}
 		}
 		if (suehas == 3) {
-			propersues.push_back(sueids[s]);
+			std::cout << "Sue: " << s << std::endl;
+			break;
 		}
-		else {
-			suehas = 0;
-		}
+		suehas = 0;
 	}
 
 	std::cout << "DONE" << std::endl;
-	for (int sue : propersues) {
-		std::cout << "Sue = " << sue << std::endl;
-	}
 	//std::cout << "The correct Aunt Sue is Sue #" << propersue << "." << std::endl;
 
 	std::cin.get();
