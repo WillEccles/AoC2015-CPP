@@ -14,6 +14,7 @@
 #include "Day13.h"
 #include "Day14.h"
 #include "Day15.h"
+#include "Day16.h"
 
 using namespace std;
 
@@ -29,11 +30,12 @@ Day11 d11;
 Day13 d13;
 Day14 d14;
 Day15 d15;
+Day16 d16;
 
 // here is where I just run each day's class
 int main()
 {
-	RUN(d15);
+	RUN(d16);
     return 0;
 }
 
