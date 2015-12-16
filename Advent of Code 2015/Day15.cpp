@@ -46,6 +46,7 @@ void Day15::run() {
 		ingredients[_name]["durability"] = _durability;
 		ingredients[_name]["flavor"] = _flavor;
 		ingredients[_name]["texture"] = _texture;
+		ingredients[_name]["calories"] = _calories;
 	}
 
 	std::cout << "DONE" << endl;
@@ -55,42 +56,33 @@ void Day15::run() {
 
 	map<string, int> quantities;
 	int total = 0;
-	bool changed = false;
 
 	for (int frosting = 0; frosting <= 100; frosting++) {
 		for (int candy = 0; candy <= 100 - frosting; candy++) {
 			for (int butterscotch = 0; butterscotch <= 100 - (frosting + candy); butterscotch++) {
 				for (int sugar = 0; sugar <= 100 - (butterscotch + frosting + candy); sugar++) {
-
-					
 					if (frosting + sugar + candy + butterscotch == 100) {
 
 						quantities["Frosting"] = frosting;
 						quantities["Candy"] = candy;
 						quantities["Butterscotch"] = butterscotch;
 						quantities["Sugar"] = sugar;
-						
-						int cap = 0, dur = 0, flav = 0, tex = 0;
+
+						int cap = 0, dur = 0, flav = 0, tex = 0, cal = 0;
 
 						for (auto ing : inames) {
-							cap += parseQ(quantities[ing] * ingredients[ing]["capacity"]);
-							dur += parseQ(quantities[ing] * ingredients[ing]["durability"]);
-							flav += parseQ(quantities[ing] * ingredients[ing]["flavor"]);
-							tex += parseQ(quantities[ing] * ingredients[ing]["texture"]);
+							cap += quantities[ing] * ingredients[ing]["capacity"];
+							dur += quantities[ing] * ingredients[ing]["durability"];
+							flav += quantities[ing] * ingredients[ing]["flavor"];
+							tex += quantities[ing] * ingredients[ing]["texture"];
+							cal += quantities[ing] * ingredients[ing]["calories"];
 						}
 
-						if (cap * dur * flav * tex > total) {
-							changed = true;
-							total = cap * flav * dur * tex;
+						// this statement has been modified for part 2                     v-- HERE
+						if (parseQ(cap) * parseQ(dur) * parseQ(flav) * parseQ(tex) > total && cal == 500) {
+							total = parseQ(cap) * parseQ(flav) * parseQ(dur) * parseQ(tex);
 						}
-
 					}
-
-					if (changed) {
-						cout << "Total is now " << total << endl;
-						changed = false;
-					}
-
 				}
 			}
 		}
@@ -98,7 +90,7 @@ void Day15::run() {
 	
 	std::cout << "DONE" << endl;
 
-	std::cout << "The highest score should be " << total << "." << endl;
+	std::cout << "[PART 2] The highest score should be " << total << "." << endl;
 
 	std::cin.get();
 
