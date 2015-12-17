@@ -1,6 +1,8 @@
 // Advent of Code 2015.cpp : Defines the entry point for the console application.
 //
 
+#pragma region imports
+
 #include "stdafx.h"
 #include <string>
 #include <iostream>
@@ -17,8 +19,11 @@
 #include "Day16.h"
 #include "Day17.h"
 
+#pragma endregion
+
 using namespace std;
 
+#pragma region days
 Day5 d5;
 Day6 d6;
 Day7 d7;
@@ -31,11 +36,12 @@ Day14 d14;
 Day15 d15;
 Day16 d16;
 Day17 d17;
+#pragma endregion
 
 // here is where I just run each day's class
 int main()
 {
-	d16.run(2);
+	d17.run(2);
     return 0;
 }
 
