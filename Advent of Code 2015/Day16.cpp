@@ -14,7 +14,9 @@ std::string items[10] = {"children", "cats", "samoyeds", "pomeranians", "akitas"
 // needed items
 std::map<std::string, int> needs;
 
-void Day16::run() {
+void Day16::run(int part) {
+	bool part2{ part == 2 };
+
 	std::cout << "Shuffling papers and poking calculators..." << std::endl;
 
 	std::fstream reqs("Day 16 Reqs.txt");
@@ -24,7 +26,6 @@ void Day16::run() {
 	// aquire the 
 	while (reqs >> item >> q) {
 		needs[item] = q;
-		std::cout << "Item: " << item << " [" << q << " needed]" << std::endl;
 	}
 
 	reqs.close();
@@ -46,22 +47,41 @@ void Day16::run() {
 		sues[sueid][val1] = num1;
 		sues[sueid][val2] = num2;
 		sues[sueid][val3] = num3;
-
-		//std::cout << "Stored Sue #" << sueid << " " << val1 << " " << num1 << std::endl;
 	}
 
 	file.close();
 
-	// this will store what we believe to be the proper sue
-	std::vector<int> propersues;
 	int suehas = 0;
 
 	// now just loop through and see which of the sues has all of the requirements
 	for (int s = 1; s <= sueids.size(); s++) {
-		for (std::string itemid : items) {
-			if (sues[s][itemid] != -1 && sues[s][itemid] == needs[itemid]) {
-				suehas++;
-				//std::cout << "suehas: " << suehas << " s: " << s << " itemid: " << itemid << " sues[s][itemid]: " << sues[s + 1][itemid] << " needs[itemid]: " << needs[itemid] << std::endl;
+		if (!part2) {
+			for (std::string itemid : items) {
+				if (sues[s][itemid] != -1 && sues[s][itemid] == needs[itemid]) {
+					suehas++;
+				}
+			}
+		}
+		else {
+			// for part 2, cats and trees require GREATER THAN what is required for part 1
+			//             pomeranians and goldfish require FEWER THAN what is required for part 1
+			for (std::string itemid : items) {
+				if (itemid != "cats" && itemid != "trees" && itemid != "pomeranians" && itemid != "goldfish") {
+					// for checking all the other items
+					if (sues[s][itemid] != -1 && sues[s][itemid] == needs[itemid]) {
+						suehas++;
+					}
+				}
+				else if (itemid == "cats" || itemid == "trees") {
+					if (sues[s][itemid] != -1 && sues[s][itemid] > needs[itemid]) {
+						suehas++;
+					}
+				}
+				else if (itemid == "pomeranians" || itemid == "goldfish") {
+					if (sues[s][itemid] != -1 && sues[s][itemid] < needs[itemid]) {
+						suehas++;
+					}
+				}
 			}
 		}
 		if (suehas == 3) {
@@ -70,9 +90,6 @@ void Day16::run() {
 		}
 		suehas = 0;
 	}
-
-	std::cout << "DONE" << std::endl;
-	//std::cout << "The correct Aunt Sue is Sue #" << propersue << "." << std::endl;
 
 	std::cin.get();
 }

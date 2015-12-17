@@ -1,5 +1,5 @@
 #pragma once
-class Day16
+class Day17
 {
 public:
 	void run(int part);
