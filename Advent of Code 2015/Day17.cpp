@@ -66,7 +66,10 @@ void Day17::run(int part) {
 
 		if (total == 150 && !part2) combos++;
 		if (total == 150 && part2) {
-			if (sub.size() < lowest) lowest = sub.size(), combos = 0;
+			if (sub.size() < lowest) {
+				lowest = sub.size();
+				combos = 1;
+			}
 			else if (sub.size() == lowest) combos++;
 		}
 	}
