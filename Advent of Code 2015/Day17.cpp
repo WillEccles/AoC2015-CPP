@@ -27,6 +27,7 @@ void Day17::run(int part) {
 
 	cout << "Loaded " << containers.size() << " containers." << endl;
 
+	// used later on in both part 1 and part 2
 	int combos = 0;
 
 	vector<vector<int>> subsets;
@@ -52,27 +53,26 @@ void Day17::run(int part) {
 	subsets = subset;
 
 	// for part 2
-	bool foundlowest = false;
 	int lowest = 99999999;
 
 	// now go through the subsets
 	for (auto sub : subsets) {
-		if (part2 && sub.size() > lowest) break;
 
 		int total = 0;
 
 		for (int a : sub) total += a;
 
+		
+
 		if (total == 150 && !part2) combos++;
 		if (total == 150 && part2) {
-			if (!foundlowest) foundlowest = true;
-			lowest = sub.size();
-			cout << "Lowest : " << lowest;
-			combos++;
+			if (sub.size() < lowest) lowest = sub.size(), combos = 0;
+			else if (sub.size() == lowest) combos++;
 		}
 	}
 
-	cout << "There are " << combos << " combinations that add up to 150." << endl;
+	if (!part2) cout << "There are " << combos << " combinations that add up to 150." << endl;
+	else cout << "Lowest number: " << lowest << " with " << combos << " combinations." << endl;
 
 	cin.get();
 }
