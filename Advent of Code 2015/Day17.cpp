@@ -68,6 +68,7 @@ void Day17::run(int part) {
 		if (total == 150 && part2) {
 			if (sub.size() < lowest) {
 				lowest = sub.size();
+				// set this to 1 because since there is now at least one known it can't be 0
 				combos = 1;
 			}
 			else if (sub.size() == lowest) combos++;

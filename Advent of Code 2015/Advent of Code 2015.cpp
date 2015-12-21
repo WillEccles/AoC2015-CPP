@@ -18,6 +18,7 @@
 #include "Day15.h"
 #include "Day16.h"
 #include "Day17.h"
+#include "Day18.h"
 
 #pragma endregion
 
@@ -36,12 +37,13 @@ Day14 d14;
 Day15 d15;
 Day16 d16;
 Day17 d17;
+Day18 d18;
 #pragma endregion
 
 // here is where I just run each day's class
 int main()
 {
-	d17.run(2);
+	d18.run(1);
     return 0;
 }
 
