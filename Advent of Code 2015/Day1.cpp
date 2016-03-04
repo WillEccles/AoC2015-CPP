@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -11,7 +12,8 @@ using namespace std;
 void Day1::run() {
 	int f = 0;
 	char line[] = getline(fstream("Day 1 Input.txt"));
-	for (char c : l) {
-		
-	}
+	f += count(f.begin(), f.end(), '(');
+	f -= count(f.begin(), f.end(), ')');
+	cout << "He is on floor " << f << "." << endl;
+	system("pause");
 }
