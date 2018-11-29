@@ -1,0 +1,3 @@
+[submodule "wrestd"]
+	path = wrestd
+	url = https://github.com/willeccles/wrestd
